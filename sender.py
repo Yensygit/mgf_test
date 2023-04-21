@@ -11,15 +11,13 @@ def main():
     "Создание таблицы в БД если ее не существует"
     execute_query(connection, create_data_table)
 
-
-
     while True:
         time.sleep(2)
         "Получение количества записей в БД"
         query_last_id = "SELECT id FROM data;"
         last_id = execute_read_query(connection, query_last_id)
         "Если записей больше 30, чистим таблицу и сбрасываем инкримент"
-        if len(last_id)>30:
+        if len(last_id) > 30:
             query_delete_data = (f"DELETE FROM data")
             query_reset_inc = (f"TRUNCATE TABLE data RESTART IDENTITY")
             connection.autocommit = True
@@ -40,10 +38,8 @@ def main():
         "Формирование запроса для добавления данных в таблицу"
         insert_query = (f"INSERT INTO data (data, date) VALUES {data}")
         connection.autocommit = True
-        # cursor = connection.cursor()
 
         "Вызов метода для выполнения запроса в БД"
-        # cursor.execute(insert_query, data)
         execute_query(connection, insert_query)
         "Логирование работы скрипта в файл"
         file = open('log.txt', 'a', encoding='utf-8')
