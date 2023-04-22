@@ -6,7 +6,7 @@ from db import *
 
 def main():
     "Подключение к БД"
-    connection = create_connection("pgdb", "oleg", "123456", "192.168.1.74", "5432")
+    connection = create_connection("pgdb", "oleg", "123456", "127.0.0.1", "5432")
 
     "Создание таблицы в БД если ее не существует"
     execute_query(connection, create_data_table)
